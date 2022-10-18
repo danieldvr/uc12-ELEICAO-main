@@ -17,7 +17,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-        <link type="text/css" href="../css/urnaEletronica.css" rel="stylesheet">
+        <link href="../css/urnaEletronica.css" rel="stylesheet">
         <%
             if (LoggedUser.getEleitor().getTituloEleitoralEleitor() == null) {
                 response.sendRedirect("../../index.jsp");
@@ -123,9 +123,9 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark">
-                            <a href="../actions/votar.jsp?numeroCandidato=00000000" class="card-body">
-                                <h1 class="card-title pricing-card-title" style="cursor: pointer">Branco</h1>
+                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark ">
+                            <a href="../actions/votar.jsp?numeroCandidato=00000000" class="card-body button-link">
+                                <h1 class="card-title pricing-card-title">Branco</h1>
                             </a>
                         </div>
                     </div>
@@ -153,9 +153,9 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-success border border-dark">
-                            <div class="card-body" style="cursor: pointer">
-                                <button type="submit" class="btn card-title w-100 pricing-card-title text-decoration-none text-dark fs-2">Confirmar</button>
+                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark">
+                            <div type="submit" class="card-body">
+                                <h1 class="card-title pricing-card-title" style="cursor: pointer">Confirmar</h1>
                             </div>
                         </div>
                     </div>

@@ -17,3 +17,8 @@ input {
     text-align:right;
     font-size: 40px;
 }
+
+.button-link{
+    text-decoration: none !important;
+    cursor: pointer;
+}

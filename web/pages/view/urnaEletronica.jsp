@@ -17,7 +17,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-        <link type="text/css" href="../css/urnaEletronica.css" rel="stylesheet">
+        <link href="../css/styleUrna.css" rel="stylesheet"/>
         <%
             if (LoggedUser.getEleitor().getTituloEleitoralEleitor() == null) {
                 response.sendRedirect("../../index.jsp");
@@ -46,35 +46,33 @@
             </div>
         </div>
 
-        <!--        <%// out.print("<h1>Olá</h1>");%> -->
-
         <%
             VotoDTO votoDTO = new VotoDTO();
         %>
         <form action="../actions/votar.jsp" class="w-100 justify-content-center d-flex">
             <div class="w-50 d-block">
-                <div class="row row-cols-2 row-cols-md-2 mb-1 text-center">
-                    <div class="col">
-                        <div class="card mb-1 rounded-3 shadow-sm border border-dark">
-                            <div class="card-body">
+                <div class="row row-cols-2 row-cols-md-2 mb-1 text-center" id="row1">
+                    <div class="col-8 col-md-8 h-100">
+                        <div class="card mb-1 rounded-3 shadow-sm border border-dark h-100">
+                            <div class="card-body h-100">
                                 <!--INPUT DE TEXTO AHSDGAISDFGADLKOJFKGBSDFJLGSDFHasfasdfsadfgasfgasdfgafgasdfgasdf-->
                                 <input type="text" id="numeroCandidato" name="numeroCandidato" required>
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm border border-dark">
-                            <div class="card-body">
-                                <h1 class="card-title pricing-card-title">Imagem</h1>
+                    <div class="col-4 col-md-4">
+                        <div class="card mb-1 rounded-3 d-flex align-content-center w-100 align-items-center shadow-sm border border-dark h-100">
+                            <div class="d-flex align-content-center flex-wrap h-100">
+                                <h1>Imagem</h1>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row row-cols-4 row-cols-md-4 mb-1 text-center">
+                <div class="row row-cols-3 row-cols-md-3 mb-1 text-center">
                     <div class="col">
                         <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark" onclick="alterarNumero('7')">
                             <div class="card-body">
-                                <h1 class="card-title pricing-card-title" style="cursor: pointer">7</h1>
+                                <h1 class="card-title pricing-card-title">7</h1>
                             </div>
                         </div>
                     </div>
@@ -92,15 +90,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-warning border border-dark" onclick="corrigir()">
-                            <div class="card-body">
-                                <h1 class="card-title pricing-card-title" style="cursor: pointer">Corrigir</h1>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <div class="row row-cols-4 row-cols-md-4 mb-1 text-center">
+                <div class="row row-cols-3 row-cols-md-3 mb-1 text-center">
                     <div class="col">
                         <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark" onclick="alterarNumero('4')">
                             <div class="card-body">
@@ -122,15 +113,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark">
-                            <a href="../actions/votar.jsp?numeroCandidato=00000000" class="card-body">
-                                <h1 class="card-title pricing-card-title" style="cursor: pointer">Branco</h1>
-                            </a>
-                        </div>
-                    </div>
                 </div>
-                <div class="row row-cols-4 row-cols-md-4 mb-1 text-center">
+                <div class="row row-cols-3 row-cols-md-3 mb-1 text-center">
                     <div class="col">
                         <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm border btn-outline-dark btn border-dark" onclick="alterarNumero('1')">
                             <div class="card-body">
@@ -152,11 +136,40 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="row row-cols-3 row-cols-md-3 mb-1 text-center">
                     <div class="col">
-                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-success border border-dark">
-                            <div class="card-body" style="cursor: pointer">
-                                <button type="submit" class="btn card-title w-100 pricing-card-title text-decoration-none text-dark fs-2">Confirmar</button>
+                    </div>
+                    <div class="col">
+                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark" onclick="alterarNumero('0')">
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title" style="cursor: pointer">0</h1>
                             </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+                <div class="row row-cols-3 row-cols-md-3 mb-1 text-center">
+                    <div class="col">
+                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-warning border border-dark" onclick="corrigir()">
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title" style="cursor: pointer">Corrigir</h1>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark">
+                            <a href="../actions/votar.jsp?numeroCandidato=00000000" class="card-body">
+                                <h1 class="card-title pricing-card-title" style="cursor: pointer">Branco</h1>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card border-dark btn btn-success">
+                            <input type="submit" class="btn card-title w-100 h-100 pricing-card-title text-decoration-none text-dark fs-2 fw-bold" value="Confirmar"/>
                         </div>
                     </div>
                 </div>
@@ -174,6 +187,6 @@
         </div>    
         <%}%>
 
-        <script src="../javascript/urnaEletronica.js"></script>
+        <script src="../javascript/functionUrna.js"></script>
     </body>
 </html>

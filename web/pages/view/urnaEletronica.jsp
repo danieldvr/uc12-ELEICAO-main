@@ -51,18 +51,18 @@
         %>
         <form action="../actions/votar.jsp" class="w-100 justify-content-center d-flex">
             <div class="w-50 d-block">
-                <div class="row row-cols-2 row-cols-md-2 mb-1 text-center" id="row1">
+                <div class="row row-cols-2 row-cols-md-2 mb-1 text-center" id="firstRow">
                     <div class="col-8 col-md-8 h-100">
-                        <div class="card mb-1 rounded-3 shadow-sm border border-dark h-100">
-                            <div class="card-body h-100">
+                        <div class="mb-1 rounded-3 shadow-sm border border-dark h-100">
+                            <div class="h-100">
                                 <!--INPUT DE TEXTO AHSDGAISDFGADLKOJFKGBSDFJLGSDFHasfasdfsadfgasfgasdfgafgasdfgasdf-->
-                                <input type="text" id="numeroCandidato" name="numeroCandidato" required>
+                                <div id="numeroCandidato" name="numeroCandidato" class="d-flex align-content-center flex-wrap h-100 justify-content-center"></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-4 col-md-4">
-                        <div class="card mb-1 rounded-3 d-flex align-content-center w-100 align-items-center shadow-sm border border-dark h-100">
-                            <div class="d-flex align-content-center flex-wrap h-100">
+                        <div class=" mb-1 rounded-3 d-flex align-content-center w-100 align-items-center shadow-sm border border-dark h-100 justify-content-center">
+                            <div class="d-flex align-content-center flex-wrap h-100 justify-content-center">
                                 <h1>Imagem</h1>
                             </div>
                         </div>
@@ -70,69 +70,69 @@
                 </div>
                 <div class="row row-cols-3 row-cols-md-3 mb-1 text-center">
                     <div class="col">
-                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark" onclick="alterarNumero('7')">
-                            <div class="card-body">
-                                <h1 class="card-title pricing-card-title">7</h1>
+                        <div class=" mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark" onclick="alterarNumero('7')">
+                            <div class="-body">
+                                <h1>7</h1>
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark" onclick="alterarNumero('8')">
-                            <div class="card-body">
-                                <h1 class="card-title pricing-card-title" style="cursor: pointer">8</h1>
+                        <div class=" mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark" onclick="alterarNumero('8')">
+                            <div class="-body">
+                                <h1 style="cursor: pointer">8</h1>
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark" onclick="alterarNumero('9')">
-                            <div class="card-body">
-                                <h1 class="card-title pricing-card-title" style="cursor: pointer">9</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row row-cols-3 row-cols-md-3 mb-1 text-center">
-                    <div class="col">
-                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark" onclick="alterarNumero('4')">
-                            <div class="card-body">
-                                <h1 class="card-title pricing-card-title" style="cursor: pointer">4</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark" onclick="alterarNumero('5')">
-                            <div class="card-body">
-                                <h1 class="card-title pricing-card-title" style="cursor: pointer">5</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark" onclick="alterarNumero('6')">
-                            <div class="card-body">
-                                <h1 class="card-title pricing-card-title" style="cursor: pointer">6</h1>
+                        <div class=" mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark" onclick="alterarNumero('9')">
+                            <div class="-body">
+                                <h1 style="cursor: pointer">9</h1>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row row-cols-3 row-cols-md-3 mb-1 text-center">
                     <div class="col">
-                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm border btn-outline-dark btn border-dark" onclick="alterarNumero('1')">
-                            <div class="card-body">
-                                <h1 class="card-title pricing-card-title" style="cursor: pointer">1</h1>
+                        <div class=" mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark" onclick="alterarNumero('4')">
+                            <div class="-body">
+                                <h1 style="cursor: pointer">4</h1>
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark" onclick="alterarNumero('2')">
-                            <div class="card-body">
-                                <h1 class="card-title pricing-card-title" style="cursor: pointer">2</h1>
+                        <div class=" mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark" onclick="alterarNumero('5')">
+                            <div class="-body">
+                                <h1 style="cursor: pointer">5</h1>
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark" onclick="alterarNumero('3')">
-                            <div class="card-body" style="cursor: pointer">
-                                <h1 class="card-title pricing-card-title">3</h1>
+                        <div class=" mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark" onclick="alterarNumero('6')">
+                            <div class="-body">
+                                <h1 style="cursor: pointer">6</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-cols-3 row-cols-md-3 mb-1 text-center">
+                    <div class="col">
+                        <div class=" mb-1 rounded-3 w-100 align-items-center shadow-sm border btn-outline-dark btn border-dark" onclick="alterarNumero('1')">
+                            <div class="-body">
+                                <h1 style="cursor: pointer">1</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class=" mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark" onclick="alterarNumero('2')">
+                            <div class="-body">
+                                <h1 style="cursor: pointer">2</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class=" mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark" onclick="alterarNumero('3')">
+                            <div class="-body" style="cursor: pointer">
+                                <h1>3</h1>
                             </div>
                         </div>
                     </div>
@@ -141,9 +141,9 @@
                     <div class="col">
                     </div>
                     <div class="col">
-                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark" onclick="alterarNumero('0')">
-                            <div class="card-body">
-                                <h1 class="card-title pricing-card-title" style="cursor: pointer">0</h1>
+                        <div class=" mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark" onclick="alterarNumero('0')">
+                            <div>
+                                <h1 style="cursor: pointer">0</h1>
                             </div>
                         </div>
                     </div>
@@ -152,24 +152,26 @@
                 </div>
                 <div class="row row-cols-3 row-cols-md-3 mb-1 text-center">
                     <div class="col">
-                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-warning border border-dark" onclick="corrigir()">
-                            <div class="card-body">
-                                <h1 class="card-title pricing-card-title" style="cursor: pointer">Corrigir</h1>
+                        <div class="d-flex justify-content-center mb-1 h-100 mx-0 rounded-3 w-100 align-items-center shadow-sm btn btn-warning border border-dark" onclick="corrigir()">
+                            <div class="">
+                                <h1 class=" " style="cursor: pointer">Corrigir</h1>
                             </div>
                         </div>
                     </div>
 
                     <div class="col">
-                        <div class="card mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-outline-dark border border-dark">
-                            <a href="../actions/votar.jsp?numeroCandidato=00000000" class="card-body">
-                                <h1 class="card-title pricing-card-title" style="cursor: pointer">Branco</h1>
+                        <div class="d-flex justify-content-center mb-1 h-100 mx-0 rounded-3 w-100 align-items-center shadow-sm btn btn-light border border-dark pointer">
+                            <a href="../actions/votar.jsp?numeroCandidato=00000000">
+                                <h1 class="text-dark">Branco</h1>
                             </a>
                         </div>
                     </div>
 
                     <div class="col">
-                        <div class="card border-dark btn btn-success">
-                            <input type="submit" class="btn card-title w-100 h-100 pricing-card-title text-decoration-none text-dark fs-2 fw-bold" value="Confirmar"/>
+                        <div class="border-dark btn btn-success w-100 h-100">
+                            <button type="submit" class="btn h-100  text-decoration-none text-dark fw-bold">
+                                <h1>Confirmar</h1>
+                            </button>
                         </div>
                     </div>
                 </div>

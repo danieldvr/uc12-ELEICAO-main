@@ -9,11 +9,11 @@ let numeroCandidato = document.getElementById('numeroCandidato');
 
 
 function alterarNumero(numero) {
-    if (numeroCandidato.value.length < 5) {
-        numeroCandidato.value += numero;
+    if (numeroCandidato.innerHTML.length < 5) {
+        numeroCandidato.innerHTML += numero;
     }
 }
 
 function corrigir() {
-    numeroCandidato.value = ''
+    numeroCandidato.innerHTML = ''
 }

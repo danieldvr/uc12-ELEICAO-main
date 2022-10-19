@@ -19,6 +19,10 @@ and open the template in the editor.
     text-align: center;
 }
 
+.especial-button{
+    border: none !important;
+}
+
 a{
     text-decoration: none;
 }

@@ -15,7 +15,7 @@ public class EleitorDTO {
     private String nome;
     private String usuario;
     private String senha;
-    private Integer tituloEleitoralEleitor; 
+    private Integer tituloEleitoralEleitor;
     
     /**
      * @return the nomeEleitor
@@ -72,7 +72,4 @@ public class EleitorDTO {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-      
-    
-    
 }

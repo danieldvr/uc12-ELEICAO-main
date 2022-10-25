@@ -33,7 +33,7 @@
                         <%if (candidato != null) {%>
                         Cancelar Candidatura
                         <%} else {%> 
-                        Candidatar-se
+                        Solicitar Candidatura
                         <%}%>
                     </button>
                 </p>

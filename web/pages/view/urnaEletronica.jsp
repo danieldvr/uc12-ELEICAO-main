@@ -32,7 +32,7 @@
             </a>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="candidatar.jsp" class="nav-link px-2 link-dark">Candidatar-se</a></li>
+                <li><a href="candidatar.jsp" class="nav-link px-2 link-dark">Solicitar Candidatura</a></li>
             </ul>
 
             <div class="col-md-4 d-flex flex-nowrap text-end">

@@ -31,12 +31,7 @@ public class CandidatoDAO {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                CandidatoDTO objCandidatoDTO = new CandidatoDTO();
-                objCandidatoDTO.setNumeroCandidato(rs.getInt("numero_candidato"));
-                objCandidatoDTO.setTituloEleitoral(rs.getInt("titulo_eleitoral_eleitor"));
-
-                lista.add(objCandidatoDTO);
-
+                lista.add(this.preencherCandidato(rs));
             }
 
             con.close();
@@ -59,9 +54,7 @@ public class CandidatoDAO {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                objCandidatoDTO.setNumeroCandidato(rs.getInt("numero_candidato"));
-                objCandidatoDTO.setTituloEleitoral(rs.getInt("titulo_eleitoral_eleitor"));
-                return objCandidatoDTO;
+                return this.preencherCandidato(rs);
             }
             con.close();
 
@@ -77,9 +70,11 @@ public class CandidatoDAO {
         con = new ConexaoDAO().conexaoBD();
 
         try {
-            ps = con.prepareStatement("insert into candidato(titulo_eleitoral_eleitor, numero_candidato)values(?, ?)");
+            ps = con.prepareStatement("insert into candidato(titulo_eleitoral_eleitor, numero_candidato, imagem, situacao)values(?, ?, ?, ?)");
             ps.setInt(1, objCandidato.getTituloEleitoral());
             ps.setInt(2, objCandidato.getNumeroCandidato());
+            ps.setString(3, objCandidato.getImagem());
+            ps.setString(4, objCandidato.getSituacao().toString());
             ps.execute();
 
             con.close();
@@ -110,6 +105,8 @@ public class CandidatoDAO {
             ps = con.prepareStatement("update candidato set titulo_eleitoral_eleitor=? where numero_candidato = ?");
             ps.setInt(1, objCandidato.getTituloEleitoral());
             ps.setInt(2, objCandidato.getNumeroCandidato());
+            ps.setString(3, objCandidato.getImagem());
+            ps.setString(4, objCandidato.getSituacao().toString());
 
             ps.execute();
             con.close();
@@ -117,6 +114,16 @@ public class CandidatoDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public CandidatoDTO preencherCandidato(ResultSet rs) throws SQLException {
+        CandidatoDTO objCandidatoDTO = new CandidatoDTO();
+        objCandidatoDTO.setNumeroCandidato(rs.getInt("numero_candidato"));
+        objCandidatoDTO.setTituloEleitoral(rs.getInt("titulo_eleitoral_eleitor"));
+        objCandidatoDTO.setImagem(rs.getString("imagem"));
+        objCandidatoDTO.setSituacao(rs.getString("situacao").charAt(0));
+
+        return objCandidatoDTO;
     }
 
 }

@@ -13,6 +13,8 @@ public class CandidatoDTO {
     
     private Integer tituloEleitoral;
     private Integer numeroCandidato;
+    private String imagem;
+    private Character situacao;
 
     /**
      * @return the tituloEleitoral
@@ -41,8 +43,32 @@ public class CandidatoDTO {
     public void setNumeroCandidato(Integer numeroCandidato) {
         this.numeroCandidato = numeroCandidato;
     }
-    
-    
-    
-    
+
+    /**
+     * @return the situacao
+     */
+    public Character getSituacao() {
+        return situacao;
+    }
+
+    /**
+     * @param situacao the situacao to set
+     */
+    public void setSituacao(Character situacao) {
+        this.situacao = situacao;
+    }
+
+    /**
+     * @return the imagem
+     */
+    public String getImagem() {
+        return imagem;
+    }
+
+    /**
+     * @param imagem the imagem to set
+     */
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
 }

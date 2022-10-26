@@ -102,11 +102,10 @@ public class CandidatoDAO {
         con = new ConexaoDAO().conexaoBD();
 
         try {
-            ps = con.prepareStatement("update candidato set titulo_eleitoral_eleitor=? where numero_candidato = ?");
-            ps.setInt(1, objCandidato.getTituloEleitoral());
-            ps.setInt(2, objCandidato.getNumeroCandidato());
-            ps.setString(3, objCandidato.getImagem());
-            ps.setString(4, objCandidato.getSituacao().toString());
+            ps = con.prepareStatement("UPDATE candidato SET imagem = ?, situacao = ? WHERE numero_candidato = ?;");
+            ps.setString(1, objCandidato.getImagem());
+            ps.setString(2, objCandidato.getSituacao().toString());
+            ps.setInt(3, objCandidato.getNumeroCandidato());
 
             ps.execute();
             con.close();

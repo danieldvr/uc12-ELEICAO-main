@@ -35,7 +35,7 @@
                 <input id="senha" class="form-control" value="<%=eleitor.getSenha()%>" type="password" name ="senha">
                 <br>
 
-                <button type="submit" class="btn btn-primary">CADASTRAR</button>
+                <button type="submit" class="btn btn-primary">SALVAR</button>
                 <a href=urnaEletronica.jsp class="btn btn-secondary">Voltar</a>
             </form>
         </main>

@@ -103,15 +103,11 @@ public class EleitorDAO {
 
         try {
             ps = con.prepareStatement("insert into eleitor(titulo_eleitoral_eleitor, nome, usuario, senha)values(?, ?, ?, ?)");
-            System.out.print("1");
             ps.setInt(1, objEleitor.getTituloEleitoralEleitor());
-            System.out.print("2");
             ps.setString(2, objEleitor.getNome());
-            System.out.print("3");
             ps.setString(3, objEleitor.getUsuario());
-            System.out.print("4");
             ps.setString(4, objEleitor.getSenha());
-            System.out.print("5");
+            System.out.println(objEleitor.getTituloEleitoralEleitor() + "\n" + objEleitor.getNome() + "\n" + objEleitor.getUsuario() + "\n" + objEleitor.getSenha());
             ps.execute();
 
             con.close();

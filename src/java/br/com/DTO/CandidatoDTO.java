@@ -13,7 +13,7 @@ public class CandidatoDTO {
     
     private Integer tituloEleitoral;
     private Integer numeroCandidato;
-    private String imagem;
+    private byte[] imagem;
     private Character situacao;
 
     /**
@@ -52,6 +52,22 @@ public class CandidatoDTO {
     }
 
     /**
+     * @return the situacao
+     */
+    public String getSituacaoDetalhada() {
+        String situacaoDetalhada = "";
+        if(situacao == 'A'){
+            return "Aprovado";
+        }
+        else if(situacao == 'P'){
+            return "Pendente";
+        }
+        else {
+            return "Negado";
+        }
+    }
+
+    /**
      * @param situacao the situacao to set
      */
     public void setSituacao(Character situacao) {
@@ -61,14 +77,21 @@ public class CandidatoDTO {
     /**
      * @return the imagem
      */
-    public String getImagem() {
+    public byte[] getImagem() {
         return imagem;
     }
 
     /**
      * @param imagem the imagem to set
      */
-    public void setImagem(String imagem) {
+    public void setImagem(byte[] imagem) {
         this.imagem = imagem;
     }
+
+    @Override
+    public String toString() {
+        return "CandidatoDTO{" + "tituloEleitoral=" + tituloEleitoral + ", numeroCandidato=" + numeroCandidato + ", imagem=" + imagem + ", situacao=" + situacao + '}';
+    }
+    
+    
 }

@@ -16,7 +16,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
         <link href="../css/styleUrna.css" rel="stylesheet"/>
         <%
             if (LoggedUser.getEleitor().getTituloEleitoralEleitor() == null) {
@@ -32,7 +32,21 @@
             </a>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="candidatar.jsp" class="nav-link px-2 link-dark">Solicitar Candidatura</a></li>
+                <% if (LoggedUser.getEleitor().getTituloEleitoralEleitor() == 000000000) {%>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Ações do Administrador</a>
+                    <ul class="dropdown-menu">
+                        <div class="row justify-content-center">
+
+
+                        </div>   
+                        <li><a href = "votoResult.jsp" class="dropdown-item">Verificar Resultado</a></li>
+                        <li><a href = "../actions/reinciarEleicao.jsp" class="dropdown-item">Reiniciar Eleição</a></li>
+                        <li><a class="dropdown-item" href="./gerenciarCandidatos.jsp">Gerenciar Candidatos</a></li>
+                    </ul>
+                </li>
+                <%}%>
+                <li><a href="candidatar.jsp" class="nav-link px-2 link-dark">Gerenciar Candidatura</a></li>
             </ul>
 
             <div class="col-md-4 d-flex flex-nowrap text-end">
@@ -66,23 +80,23 @@
                 </div>
                 <div class="row mb-1 text-center">
                     <div class="col-md-4">
-                        <div class=" mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-light border border-dark" onclick="alterarNumero('7')">
+                        <div class=" mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-light border border-dark" onclick="alterarNumero('1')">
                             <div class="-body">
-                                <h1>7</h1>
+                                <h1>1</h1>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class=" mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-light border border-dark" onclick="alterarNumero('8')">
+                        <div class=" mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-light border border-dark" onclick="alterarNumero('2')">
                             <div class="-body">
-                                <h1>8</h1>
+                                <h1>2</h1>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class=" mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-light border border-dark" onclick="alterarNumero('9')">
+                        <div class=" mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-light border border-dark" onclick="alterarNumero('3')">
                             <div class="-body">
-                                <h1>9</h1>
+                                <h1>3</h1>
                             </div>
                         </div>
                     </div>
@@ -112,23 +126,23 @@
                 </div>
                 <div class="row row-cols-3 row-cols-md-3 mb-1 text-center">
                     <div class="col-md-4">
-                        <div class=" mb-1 rounded-3 w-100 align-items-center shadow-sm border btn-light btn border-dark" onclick="alterarNumero('1')">
+                        <div class=" mb-1 rounded-3 w-100 align-items-center shadow-sm border btn-light btn border-dark" onclick="alterarNumero('7')">
                             <div class="-body">
-                                <h1>1</h1>
+                                <h1>7</h1>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class=" mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-light border border-dark" onclick="alterarNumero('2')">
+                        <div class=" mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-light border border-dark" onclick="alterarNumero('8')">
                             <div class="-body">
-                                <h1>2</h1>
+                                <h1>8</h1>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class=" mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-light border border-dark" onclick="alterarNumero('3')">
+                        <div class=" mb-1 rounded-3 w-100 align-items-center shadow-sm btn btn-light border border-dark" onclick="alterarNumero('9')">
                             <div class="-body">
-                                <h1>3</h1>
+                                <h1>9</h1>
                             </div>
                         </div>
                     </div>
@@ -178,13 +192,8 @@
             if (votos.procurarPorTituloEleitoral(LoggedUser.getEleitor().getTituloEleitoralEleitor())) {%>
         <p class="text-center text-danger">Você não pode votar mais de uma vez</p>
         <%}%>
-        <% if (LoggedUser.getEleitor().getTituloEleitoralEleitor() == 000000000) {%>
-        <div class="row justify-content-center">
-            <a href = "votoResult.jsp" class="btn btn-success text-center w-25 mx-1">Verificar Resultado</a>
-            <a href = "../actions/reinciarEleicao.jsp" class="btn btn-success text-center w-25 mx-1">Reiniciar Eleição</a>        
-        </div>    
-        <%}%>
 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
         <script src="../javascript/functionUrna.js"></script>
     </body>
 </html>

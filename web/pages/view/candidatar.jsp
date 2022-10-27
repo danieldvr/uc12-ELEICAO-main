@@ -26,14 +26,24 @@
                 <%if (candidato == null) {%>
                 <label for="nome" class="form-label">Digite seu número</label>
                 <input id="numeroCandidato" class="form-control" type="text" name="numeroCandidato">
+                <%} else {%>
+                <%if (candidato.getSituacao() == 'A') {%>
+                <p class="text-center">Sua situação encontra-se aprovada!</p>
+                <%}%>
+                <%if (candidato.getSituacao() == 'P') {%>
+                <p class="text-center">Sua situação encontra-se pendente!</p>
+                <%}%>
+                <%if (candidato.getSituacao() == 'N') {%>
+                <p class="text-center">Sua situação encontra-se negada!</p>
+                <%}%>
                 <%}%>
 
                 <p class="mt-5 text-center">
                     <button type="submit" class="btn btn-primary">
-                        <%if (candidato != null) {%>
+                        <%if (candidato != null && candidato.getSituacao() != 'N') {%>
                         Cancelar Candidatura
                         <%} else {%> 
-                        Solicitar Candidatura
+                        Solicitar Candidatura <%if (candidato != null) {%>novamente<%}%>
                         <%}%>
                     </button>
                 </p>

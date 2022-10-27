@@ -22,16 +22,21 @@ public class CandidatoDAO {
     PreparedStatement ps;
     ResultSet rs;
 
-    public ArrayList<CandidatoDTO> pesquisarCandidato() throws ClassNotFoundException {
+    public ArrayList<CandidatoDTO> listarCandidatos() throws ClassNotFoundException {
         con = new ConexaoDAO().conexaoBD();
         ArrayList<CandidatoDTO> lista = new ArrayList();
 
         try {
-            ps = con.prepareStatement("select * from candidato");
+            ps = con.prepareStatement("SELECT * FROM candidato");
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                lista.add(this.preencherCandidato(rs));
+                CandidatoDTO objCandidatoDTO = new CandidatoDTO();
+                objCandidatoDTO.setNumeroCandidato(rs.getInt("numero_candidato"));
+                objCandidatoDTO.setTituloEleitoral(rs.getInt("titulo_eleitoral_eleitor"));
+                objCandidatoDTO.setImagem(rs.getBytes("imagem"));
+                objCandidatoDTO.setSituacao(rs.getString("situacao").charAt(0));
+                lista.add(objCandidatoDTO);
             }
 
             con.close();
@@ -41,6 +46,60 @@ public class CandidatoDAO {
 
         }
         return lista;
+
+    }
+
+    public ArrayList<CandidatoDTO> listarCandidatosAprovados() throws ClassNotFoundException {
+        con = new ConexaoDAO().conexaoBD();
+        ArrayList<CandidatoDTO> lista = new ArrayList();
+
+        try {
+            ps = con.prepareStatement("SELECT * FROM candidato WHERE situacao = 'A'");
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                CandidatoDTO objCandidatoDTO = new CandidatoDTO();
+                objCandidatoDTO.setNumeroCandidato(rs.getInt("numero_candidato"));
+                objCandidatoDTO.setTituloEleitoral(rs.getInt("titulo_eleitoral_eleitor"));
+                objCandidatoDTO.setImagem(rs.getBytes("imagem"));
+                objCandidatoDTO.setSituacao(rs.getString("situacao").charAt(0));
+                lista.add(objCandidatoDTO);
+            }
+
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        return lista;
+
+    }
+
+    public CandidatoDTO pesquisarCandidatoAprovadoPorTitulo(Integer tituloEleitoral) throws ClassNotFoundException {
+        con = new ConexaoDAO().conexaoBD();
+        CandidatoDTO objCandidatoDTO = new CandidatoDTO();
+
+        try {
+            ps = con.prepareStatement("select * from candidato WHERE titulo_eleitoral_eleitor = ? AND situacao = 'A'");
+            ps.setInt(1, tituloEleitoral);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                objCandidatoDTO.setNumeroCandidato(rs.getInt("numero_candidato"));
+                objCandidatoDTO.setTituloEleitoral(rs.getInt("titulo_eleitoral_eleitor"));
+                objCandidatoDTO.setImagem(rs.getBytes("imagem"));
+                objCandidatoDTO.setSituacao(rs.getString("situacao").charAt(0));
+                
+                return objCandidatoDTO;
+            }
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        return null;
 
     }
 
@@ -54,7 +113,12 @@ public class CandidatoDAO {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                return this.preencherCandidato(rs);
+                objCandidatoDTO.setNumeroCandidato(rs.getInt("numero_candidato"));
+                objCandidatoDTO.setTituloEleitoral(rs.getInt("titulo_eleitoral_eleitor"));
+                objCandidatoDTO.setImagem(rs.getBytes("imagem"));
+                objCandidatoDTO.setSituacao(rs.getString("situacao").charAt(0));
+                
+                return objCandidatoDTO;
             }
             con.close();
 
@@ -70,11 +134,10 @@ public class CandidatoDAO {
         con = new ConexaoDAO().conexaoBD();
 
         try {
-            ps = con.prepareStatement("insert into candidato(titulo_eleitoral_eleitor, numero_candidato, imagem, situacao)values(?, ?, ?, ?)");
+            ps = con.prepareStatement("insert into candidato(titulo_eleitoral_eleitor, numero_candidato, imagem, situacao) values (?, ?, ?, 'P')");
             ps.setInt(1, objCandidato.getTituloEleitoral());
             ps.setInt(2, objCandidato.getNumeroCandidato());
-            ps.setString(3, objCandidato.getImagem());
-            ps.setString(4, objCandidato.getSituacao().toString());
+            ps.setBytes(3, objCandidato.getImagem());
             ps.execute();
 
             con.close();
@@ -102,10 +165,18 @@ public class CandidatoDAO {
         con = new ConexaoDAO().conexaoBD();
 
         try {
-            ps = con.prepareStatement("UPDATE candidato SET imagem = ?, situacao = ? WHERE numero_candidato = ?;");
-            ps.setString(1, objCandidato.getImagem());
-            ps.setString(2, objCandidato.getSituacao().toString());
-            ps.setInt(3, objCandidato.getNumeroCandidato());
+            String sql = "UPDATE candidato SET ";
+            if (objCandidato.getImagem() != null) {
+                sql += "imagem = '" + objCandidato.getImagem() + "'";
+            }
+            if (objCandidato.getSituacao() != null) {
+                if (objCandidato.getImagem() != null) {
+                    sql += ", ";
+                }
+                sql += "situacao = '" + objCandidato.getSituacao() + "'";
+            }
+
+            ps = con.prepareStatement(sql + " WHERE titulo_eleitoral_eleitor = " + objCandidato.getTituloEleitoral()+ ";");
 
             ps.execute();
             con.close();
@@ -119,7 +190,7 @@ public class CandidatoDAO {
         CandidatoDTO objCandidatoDTO = new CandidatoDTO();
         objCandidatoDTO.setNumeroCandidato(rs.getInt("numero_candidato"));
         objCandidatoDTO.setTituloEleitoral(rs.getInt("titulo_eleitoral_eleitor"));
-        objCandidatoDTO.setImagem(rs.getString("imagem"));
+        objCandidatoDTO.setImagem(rs.getBytes("imagem"));
         objCandidatoDTO.setSituacao(rs.getString("situacao").charAt(0));
 
         return objCandidatoDTO;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 27-Out-2022 às 02:50
+-- Tempo de geração: 29-Out-2022 às 00:54
 -- Versão do servidor: 10.4.11-MariaDB
 -- versão do PHP: 7.2.26
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `daniel2`
 --
+CREATE DATABASE IF NOT EXISTS `daniel2` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `daniel2`;
 
 -- --------------------------------------------------------
 
@@ -31,7 +33,6 @@ SET time_zone = "+00:00";
 CREATE TABLE `candidato` (
   `numero_candidato` int(11) NOT NULL,
   `titulo_eleitoral_eleitor` int(11) NOT NULL,
-  `imagem` varbinary(8000) DEFAULT NULL,
   `situacao` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -39,8 +40,9 @@ CREATE TABLE `candidato` (
 -- Extraindo dados da tabela `candidato`
 --
 
-INSERT INTO `candidato` (`numero_candidato`, `titulo_eleitoral_eleitor`, `imagem`, `situacao`) VALUES
-(0, 0, NULL, 'A');
+INSERT INTO `candidato` (`numero_candidato`, `titulo_eleitoral_eleitor`, `situacao`) VALUES
+(0, 0, 'A'),
+(10, 1234567, 'A');
 
 -- --------------------------------------------------------
 
@@ -60,7 +62,10 @@ CREATE TABLE `eleitor` (
 --
 
 INSERT INTO `eleitor` (`titulo_eleitoral_eleitor`, `nome`, `usuario`, `senha`) VALUES
-(0, 'Branco', 'admin', '123');
+(0, 'Branco', 'admin', '123'),
+(1234555, 'gabriel', 'gabriel', '123'),
+(1234566, 'caio', 'caio', '123'),
+(1234567, 'daniel', 'daniel', '1234567');
 
 -- --------------------------------------------------------
 
@@ -75,6 +80,15 @@ CREATE TABLE `voto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Extraindo dados da tabela `voto`
+--
+
+INSERT INTO `voto` (`idvoto`, `titulo_eleitoral_eleitor`, `numero_candidato`) VALUES
+(6, 0, 0),
+(7, 1234567, 0),
+(9, 1234566, 10);
+
+--
 -- Índices para tabelas despejadas
 --
 
@@ -83,7 +97,6 @@ CREATE TABLE `voto` (
 --
 ALTER TABLE `candidato`
   ADD PRIMARY KEY (`numero_candidato`),
-  ADD UNIQUE KEY `imagens_UNIQUE` (`imagem`) USING HASH,
   ADD KEY `fk_candidato_eleitor1_idx` (`titulo_eleitoral_eleitor`);
 
 --
@@ -110,7 +123,7 @@ ALTER TABLE `voto`
 -- AUTO_INCREMENT de tabela `voto`
 --
 ALTER TABLE `voto`
-  MODIFY `idvoto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idvoto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restrições para despejos de tabelas
@@ -128,6 +141,11 @@ ALTER TABLE `candidato`
 ALTER TABLE `voto`
   ADD CONSTRAINT `fk_voto_candidato1` FOREIGN KEY (`numero_candidato`) REFERENCES `candidato` (`numero_candidato`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_voto_eleitor` FOREIGN KEY (`titulo_eleitoral_eleitor`) REFERENCES `eleitor` (`titulo_eleitoral_eleitor`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+--
+-- Banco de dados: `test`
+--
+CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `test`;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

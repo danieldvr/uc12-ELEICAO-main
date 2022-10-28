@@ -33,7 +33,13 @@
 
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
                 <div class="w-100 text-center py-3">
-                    <a class="w-10" href="pages/view/inserirEleitor.html">Cadastrar</a>
+                    <a class="w-10" href="./pages/view/inserirEleitor.jsp">Cadastrar</a>
+
+                    <%if (request.getParameter("erro") != null) {%>
+                    <p class="tex-center text-danger mt-3">Usuário ou senha inválidos</p>
+                    <%
+                        }
+                    %>
                 </div>
                 <p class="mt-5 text-center mb-3 py-5 text-muted">© Eleições 2022</p>
             </form>

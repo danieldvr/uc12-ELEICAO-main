@@ -4,6 +4,7 @@
     Author     : sala19a
 --%>
 
+<%@page import="br.com.DAO.CandidatoDAO"%>
 <%@page import="br.com.Config.LoggedUser"%>
 <%@page import="br.com.DTO.VotoDTO"%>
 <%@page import="br.com.DAO.VotoDAO"%>
@@ -18,20 +19,25 @@
         <%
             try {
                 VotoDAO repository = new VotoDAO();
+                CandidatoDAO candidatoRepository = new CandidatoDAO();
                 VotoDTO voto = new VotoDTO();
 
                 voto.setTituloEleitoralEleitor(LoggedUser.getEleitor().getTituloEleitoralEleitor());
 
-                if (request.getParameter("numeroCandidato") != null) {
+                if (request.getParameter("numeroCandidato") != null && request.getParameter("numeroCandidato") != "" ) {
                     voto.setNumeroCandidato(Integer.parseInt(request.getParameter("numeroCandidato")));
                     if (repository.procurarPorTituloEleitoral(LoggedUser.getEleitor().getTituloEleitoralEleitor())) {
-                        response.sendRedirect("../view/urnaEletronica.jsp");
+                        response.sendRedirect("../view/urnaEletronica.jsp?situacaoVoto=1");
                     } else {
-                        repository.votarCandidato(voto);
-                        response.sendRedirect("../../index.jsp");
+                        if (candidatoRepository.pesquisarCandidatoAprovadoPorNumero(voto.getNumeroCandidato()) != null) {
+                            repository.votarCandidato(voto);
+                            response.sendRedirect("../view/urnaEletronica.jsp?situacaoVoto=1");
+                        } else {
+                            response.sendRedirect("../view/urnaEletronica.jsp?situacaoVoto=2");
+                        }
                     }
                 } else {
-                    response.sendRedirect("../view/urnaEletronica.jsp");
+                    response.sendRedirect("../view/urnaEletronica.jsp?situacaoVoto=2");
                 }
 
             } catch (Exception e) {

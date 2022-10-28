@@ -24,8 +24,8 @@
             <form action="../actions/candidatar.jsp" method="POST">
                 <h1 class="h3 text-center mb-3 py-5 fw-normal">Candidatura</h1>
                 <%if (candidato == null) {%>
-                <label for="nome" class="form-label">Digite seu número</label>
-                <input id="numeroCandidato" class="form-control" type="text" name="numeroCandidato">
+                <label for="numeroCandidato" class="form-label">Digite seu número</label>
+                <input id="numeroCandidato" class="form-control" type="text" name="numeroCandidato" required>
                 <%} else {%>
                 <%if (candidato.getSituacao() == 'A') {%>
                 <p class="text-center">Sua situação encontra-se aprovada!</p>
@@ -40,10 +40,10 @@
 
                 <p class="mt-5 text-center">
                     <button type="submit" class="btn btn-primary">
-                        <%if (candidato != null && candidato.getSituacao() != 'N') {%>
+                        <%if (candidato != null) {%>
                         Cancelar Candidatura
-                        <%} else {%> 
-                        Solicitar Candidatura <%if (candidato != null) {%>novamente<%}%>
+                        <%} else if (candidato == null || candidato.getSituacao() == 'N' || candidato.getSituacao() == 'P'){%> 
+                        Solicitar Candidatura <%if (candidato != null && candidato.getSituacao() == 'N') {%>novamente<%}%>
                         <%}%>
                     </button>
                 </p>

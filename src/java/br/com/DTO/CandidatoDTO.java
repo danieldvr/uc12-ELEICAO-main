@@ -13,7 +13,6 @@ public class CandidatoDTO {
     
     private Integer tituloEleitoral;
     private Integer numeroCandidato;
-    private byte[] imagem;
     private Character situacao;
 
     /**
@@ -74,23 +73,9 @@ public class CandidatoDTO {
         this.situacao = situacao;
     }
 
-    /**
-     * @return the imagem
-     */
-    public byte[] getImagem() {
-        return imagem;
-    }
-
-    /**
-     * @param imagem the imagem to set
-     */
-    public void setImagem(byte[] imagem) {
-        this.imagem = imagem;
-    }
-
     @Override
     public String toString() {
-        return "CandidatoDTO{" + "tituloEleitoral=" + tituloEleitoral + ", numeroCandidato=" + numeroCandidato + ", imagem=" + imagem + ", situacao=" + situacao + '}';
+        return "CandidatoDTO{" + "tituloEleitoral=" + tituloEleitoral + ", numeroCandidato=" + numeroCandidato + ", situacao=" + situacao + '}';
     }
     
     

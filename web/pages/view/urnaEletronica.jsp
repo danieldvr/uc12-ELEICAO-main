@@ -62,18 +62,11 @@
         <form action="../actions/votar.jsp" class="w-100 justify-content-center d-flex">
             <div class="container-lg">
                 <div class="row row-cols-2 row-cols-md-2 mb-1 text-center" id="firstRow">
-                    <div class="col-8 col-md-8 h-100">
+                    <div class="col-12 col-md-12 h-100">
                         <div class="mb-1 rounded-3 shadow-sm border border-dark h-100">
                             <div class="h-100">
                                 <!--INPUT DE TEXTO AHSDGAISDFGADLKOJFKGBSDFJLGSDFHasfasdfsadfgasfgasdfgafgasdfgasdf-->
-                                <div id="numeroCandidato" name="numeroCandidato" class="d-flex align-content-center flex-wrap h-100 justify-content-center"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4 col-md-4">
-                        <div class=" mb-1 rounded-3 d-flex align-content-center w-100 align-items-center shadow-sm border border-dark h-100 justify-content-center">
-                            <div class="d-flex align-content-center flex-wrap h-100 justify-content-center">
-                                <img src="" />
+                                <input type="text" for="numeroCandidato" id="numeroCandidato" name="numeroCandidato" class="d-flex align-content-center flex-wrap h-100 justify-content-center"/>
                             </div>
                         </div>
                     </div>
@@ -190,8 +183,19 @@
         <%
             VotoDAO votos = new VotoDAO();
             if (votos.procurarPorTituloEleitoral(LoggedUser.getEleitor().getTituloEleitoralEleitor())) {%>
-        <p class="text-center text-danger">Você não pode votar mais de uma vez</p>
+        <p class="text-center text-success">Voto validado com sucesso!</p>
         <%}%>
+
+
+        <%if (request.getParameter("situacaoVoto") != null && request.getParameter("situacaoVoto") != "") {%>
+        <%if (Integer.parseInt(request.getParameter("situacaoVoto")) == 1) {%>
+        <p class="text-center text-success">Voto validado com sucesso!</p>
+        <%} else if (Integer.parseInt(request.getParameter("situacaoVoto")) == 2) {%>
+        <p class="text-center text-danger">Voto inválido.</p>
+        <%
+                }
+            }
+        %>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
         <script src="../javascript/functionUrna.js"></script>

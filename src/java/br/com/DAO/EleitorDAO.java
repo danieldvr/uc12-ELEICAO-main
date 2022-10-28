@@ -107,7 +107,6 @@ public class EleitorDAO {
             ps.setString(2, objEleitor.getNome());
             ps.setString(3, objEleitor.getUsuario());
             ps.setString(4, objEleitor.getSenha());
-            System.out.println(objEleitor.getTituloEleitoralEleitor() + "\n" + objEleitor.getNome() + "\n" + objEleitor.getUsuario() + "\n" + objEleitor.getSenha());
             ps.execute();
 
             con.close();

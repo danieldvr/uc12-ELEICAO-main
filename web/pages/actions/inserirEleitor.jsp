@@ -34,10 +34,16 @@
                 if (request.getParameter("senha") != null) {
                     eleitorDTO.setSenha(request.getParameter("senha"));
                 }
-
-                repository.cadastrarEleitor(eleitorDTO);
-                LoggedUser.setEleitor(eleitorDTO);
-                response.sendRedirect("../view/urnaEletronica.jsp");
+                if (repository.findByUsuario(eleitorDTO.getUsuario()).getNome() != null) {
+                    System.out.print(repository.findByUsuario(eleitorDTO.getUsuario()));
+                    response.sendRedirect("../view/inserirEleitor.jsp?usuario='1'");
+                } else if (repository.pesquisarEleitorPorTituloEleitoral(eleitorDTO.getTituloEleitoralEleitor()).getNome() != null || eleitorDTO.getTituloEleitoralEleitor().toString().length() != 7) {
+                    response.sendRedirect("../view/inserirEleitor.jsp?tituloEleitoralEleitor='1'");
+                } else {
+                    repository.cadastrarEleitor(eleitorDTO);
+                    LoggedUser.setEleitor(eleitorDTO);
+                    response.sendRedirect("../view/urnaEletronica.jsp");
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();

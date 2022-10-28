@@ -25,6 +25,7 @@
                 CandidatoDTO candidatoDTO = new CandidatoDTO();
 
                 candidatoDTO.setTituloEleitoral(LoggedUser.getEleitor().getTituloEleitoralEleitor());
+                
                 if (request.getParameter("numeroCandidato") != null) {
                     candidatoDTO.setNumeroCandidato(Integer.parseInt(request.getParameter("numeroCandidato")));
                     repository.cadastrarCandidato(candidatoDTO);

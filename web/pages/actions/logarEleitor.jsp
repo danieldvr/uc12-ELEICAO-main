@@ -33,13 +33,13 @@
                             LoggedUser.setEleitor(objEleitorDTO);
                             response.sendRedirect("../view/urnaEletronica.jsp");
                         } else {
-                            response.sendRedirect("../../index.jsp");
+                            response.sendRedirect("../../index.jsp?erro");
                         }
                     } else {
-                        response.sendRedirect("../../index.jsp");
+                        response.sendRedirect("../../index.jsp?erro");
                     }
                 } else {
-                    response.sendRedirect("../../index.jsp");
+                    response.sendRedirect("../../index.jsp?erro");
                 }
 
             } catch (Exception e) {

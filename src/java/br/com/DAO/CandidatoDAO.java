@@ -34,7 +34,6 @@ public class CandidatoDAO {
                 CandidatoDTO objCandidatoDTO = new CandidatoDTO();
                 objCandidatoDTO.setNumeroCandidato(rs.getInt("numero_candidato"));
                 objCandidatoDTO.setTituloEleitoral(rs.getInt("titulo_eleitoral_eleitor"));
-                objCandidatoDTO.setImagem(rs.getBytes("imagem"));
                 objCandidatoDTO.setSituacao(rs.getString("situacao").charAt(0));
                 lista.add(objCandidatoDTO);
             }
@@ -61,7 +60,6 @@ public class CandidatoDAO {
                 CandidatoDTO objCandidatoDTO = new CandidatoDTO();
                 objCandidatoDTO.setNumeroCandidato(rs.getInt("numero_candidato"));
                 objCandidatoDTO.setTituloEleitoral(rs.getInt("titulo_eleitoral_eleitor"));
-                objCandidatoDTO.setImagem(rs.getBytes("imagem"));
                 objCandidatoDTO.setSituacao(rs.getString("situacao").charAt(0));
                 lista.add(objCandidatoDTO);
             }
@@ -88,9 +86,8 @@ public class CandidatoDAO {
             while (rs.next()) {
                 objCandidatoDTO.setNumeroCandidato(rs.getInt("numero_candidato"));
                 objCandidatoDTO.setTituloEleitoral(rs.getInt("titulo_eleitoral_eleitor"));
-                objCandidatoDTO.setImagem(rs.getBytes("imagem"));
                 objCandidatoDTO.setSituacao(rs.getString("situacao").charAt(0));
-                
+
                 return objCandidatoDTO;
             }
             con.close();
@@ -100,7 +97,31 @@ public class CandidatoDAO {
 
         }
         return null;
+    }
 
+    public CandidatoDTO pesquisarCandidatoAprovadoPorNumero(Integer numero) throws ClassNotFoundException {
+        con = new ConexaoDAO().conexaoBD();
+        CandidatoDTO objCandidatoDTO = new CandidatoDTO();
+
+        try {
+            ps = con.prepareStatement("select * from candidato WHERE numero_candidato = ? AND situacao = 'A'");
+            ps.setInt(1, numero);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                objCandidatoDTO.setNumeroCandidato(rs.getInt("numero_candidato"));
+                objCandidatoDTO.setTituloEleitoral(rs.getInt("titulo_eleitoral_eleitor"));
+                objCandidatoDTO.setSituacao(rs.getString("situacao").charAt(0));
+
+                return objCandidatoDTO;
+            }
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        return null;
     }
 
     public CandidatoDTO pesquisarCandidatoPorTitulo(Integer tituloEleitoral) throws ClassNotFoundException {
@@ -115,9 +136,8 @@ public class CandidatoDAO {
             while (rs.next()) {
                 objCandidatoDTO.setNumeroCandidato(rs.getInt("numero_candidato"));
                 objCandidatoDTO.setTituloEleitoral(rs.getInt("titulo_eleitoral_eleitor"));
-                objCandidatoDTO.setImagem(rs.getBytes("imagem"));
                 objCandidatoDTO.setSituacao(rs.getString("situacao").charAt(0));
-                
+
                 return objCandidatoDTO;
             }
             con.close();
@@ -134,10 +154,9 @@ public class CandidatoDAO {
         con = new ConexaoDAO().conexaoBD();
 
         try {
-            ps = con.prepareStatement("insert into candidato(titulo_eleitoral_eleitor, numero_candidato, imagem, situacao) values (?, ?, ?, 'P')");
+            ps = con.prepareStatement("insert into candidato(titulo_eleitoral_eleitor, numero_candidato, situacao) values (?, ?, 'P')");
             ps.setInt(1, objCandidato.getTituloEleitoral());
             ps.setInt(2, objCandidato.getNumeroCandidato());
-            ps.setBytes(3, objCandidato.getImagem());
             ps.execute();
 
             con.close();
@@ -166,17 +185,11 @@ public class CandidatoDAO {
 
         try {
             String sql = "UPDATE candidato SET ";
-            if (objCandidato.getImagem() != null) {
-                sql += "imagem = '" + objCandidato.getImagem() + "'";
-            }
             if (objCandidato.getSituacao() != null) {
-                if (objCandidato.getImagem() != null) {
-                    sql += ", ";
-                }
                 sql += "situacao = '" + objCandidato.getSituacao() + "'";
             }
 
-            ps = con.prepareStatement(sql + " WHERE titulo_eleitoral_eleitor = " + objCandidato.getTituloEleitoral()+ ";");
+            ps = con.prepareStatement(sql + " WHERE titulo_eleitoral_eleitor = " + objCandidato.getTituloEleitoral() + ";");
 
             ps.execute();
             con.close();
@@ -190,7 +203,6 @@ public class CandidatoDAO {
         CandidatoDTO objCandidatoDTO = new CandidatoDTO();
         objCandidatoDTO.setNumeroCandidato(rs.getInt("numero_candidato"));
         objCandidatoDTO.setTituloEleitoral(rs.getInt("titulo_eleitoral_eleitor"));
-        objCandidatoDTO.setImagem(rs.getBytes("imagem"));
         objCandidatoDTO.setSituacao(rs.getString("situacao").charAt(0));
 
         return objCandidatoDTO;

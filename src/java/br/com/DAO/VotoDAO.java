@@ -137,6 +137,8 @@ public class VotoDAO {
             ps = con.prepareStatement("DELETE FROM voto;");
             ps.execute();
             
+            ps = con.prepareStatement("DELETE FROM candidato WHERE titulo_eleitoral_eleitor != 0;");
+            ps.execute();
             con.close();
             
         } catch (SQLException e) {

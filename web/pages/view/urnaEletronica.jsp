@@ -19,7 +19,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
         <link href="../css/styleUrna.css" rel="stylesheet"/>
         <%
-            if (LoggedUser.getEleitor().getTituloEleitoralEleitor() == null) {
+            if (LoggedUser.getEleitor() == null || LoggedUser.getEleitor() == new EleitorDTO()) {
                 response.sendRedirect("../../index.jsp");
             }
         %>
@@ -51,7 +51,9 @@
 
             <div class="col-md-4 d-flex flex-nowrap text-end">
                 <span class="me-2">Bem vindo, <%=LoggedUser.getEleitor().getNome()%></span>
+                <%if (LoggedUser.getEleitor().getTituloEleitoralEleitor() != 0){%>
                 <a href="editarEleitor.jsp" class="btn btn-primary me-2">Editar</a>
+                <%}%>
                 <a href="../../index.jsp" class="btn btn-primary">Sair</a>
             </div>
         </header>
@@ -66,7 +68,7 @@
                         <div class="mb-1 rounded-3 shadow-sm border border-dark h-100">
                             <div class="h-100">
                                 <!--INPUT DE TEXTO AHSDGAISDFGADLKOJFKGBSDFJLGSDFHasfasdfsadfgasfgasdfgafgasdfgasdf-->
-                                <input type="text" for="numeroCandidato" id="numeroCandidato" name="numeroCandidato" class="d-flex align-content-center flex-wrap h-100 justify-content-center"/>
+                                <input type="text" for="numeroCandidato" id="numeroCandidato" onclick="numeroCandidato.blur()" name="numeroCandidato" class="d-flex align-content-center flex-wrap h-100 justify-content-center"/>
                             </div>
                         </div>
                     </div>
@@ -184,7 +186,7 @@
             VotoDAO votos = new VotoDAO();
             if (votos.procurarPorTituloEleitoral(LoggedUser.getEleitor().getTituloEleitoralEleitor())) {%>
         <p class="text-center text-success">Voto validado com sucesso!</p>
-        <%}%>
+        <%} else {%>
 
 
         <%if (request.getParameter("situacaoVoto") != null && request.getParameter("situacaoVoto") != "") {%>
@@ -193,6 +195,7 @@
         <%} else if (Integer.parseInt(request.getParameter("situacaoVoto")) == 2) {%>
         <p class="text-center text-danger">Voto inválido.</p>
         <%
+                    }
                 }
             }
         %>

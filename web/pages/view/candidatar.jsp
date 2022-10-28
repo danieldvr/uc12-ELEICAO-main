@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@page import="br.com.DTO.EleitorDTO"%>
 <%@page import="br.com.DTO.CandidatoDTO"%>
 <%@page import="br.com.Config.LoggedUser"%>
 <%@page import="br.com.DAO.CandidatoDAO"%>
@@ -14,6 +15,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
         <title>JSP Page</title>
+        <%
+            if (LoggedUser.getEleitor() == null || LoggedUser.getEleitor() == new EleitorDTO()) {
+                response.sendRedirect("../../index.jsp");
+            }
+        %>
     </head>
     <body>
         <%
@@ -39,13 +45,16 @@
                 <%}%>
 
                 <p class="mt-5 text-center">
+                    <%if (candidato != null && candidato.getNumeroCandidato() != 0) {%>
                     <button type="submit" class="btn btn-primary">
-                        <%if (candidato != null) {%>
                         Cancelar Candidatura
-                        <%} else if (candidato == null || candidato.getSituacao() == 'N' || candidato.getSituacao() == 'P'){%> 
-                        Solicitar Candidatura <%if (candidato != null && candidato.getSituacao() == 'N') {%>novamente<%}%>
-                        <%}%>
                     </button>
+                    <%} else if (candidato == null || candidato.getSituacao() == 'N' || candidato.getSituacao() == 'P') {%> 
+
+                    <button type="submit" class="btn btn-primary">
+                        Solicitar Candidatura <%if (candidato != null && candidato.getSituacao() == 'N') {%>novamente<%}%>
+                    </button>
+                    <%}%>
                 </p>
                 <p class="text-center">
                     <a href="urnaEletronica.jsp" class="btn btn-secondary">Voltar</a>

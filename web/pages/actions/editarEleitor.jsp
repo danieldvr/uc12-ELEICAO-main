@@ -33,9 +33,13 @@
                     eleitorDTO.setSenha(request.getParameter("senha"));
                 }
 
-                repository.alterarEleitor(eleitorDTO);
-                LoggedUser.setEleitor(eleitorDTO);
-                response.sendRedirect("../view/urnaEletronica.jsp");
+                if (repository.findByUsuario(eleitorDTO.getUsuario()).getNome() != null) {
+                    response.sendRedirect("../view/editarEleitor.jsp?situacaoEdicao=2");
+                } else {
+                    repository.alterarEleitor(eleitorDTO);
+                    LoggedUser.setEleitor(eleitorDTO);
+                    response.sendRedirect("../view/editarEleitor.jsp?situacaoEdicao=1");
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();

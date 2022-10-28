@@ -7,7 +7,6 @@
 
 let numeroCandidato = document.getElementById('numeroCandidato');
 
-
 function alterarNumero(numero) {
     if (numeroCandidato.value < 99999) {
         numeroCandidato.value += numero;

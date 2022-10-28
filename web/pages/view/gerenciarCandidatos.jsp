@@ -4,6 +4,10 @@
     Author     : sala19a
 --%>
 
+<%@page import="br.com.Config.LoggedUser"%>
+<%@page import="br.com.DTO.EleitorDTO"%>
+<%@page import="br.com.DTO.EleitorDTO"%>
+<%@page import="br.com.DAO.EleitorDAO"%>
 <%@page import="br.com.DTO.CandidatoDTO"%>
 <%@page import="br.com.DAO.CandidatoDAO"%>
 <%@page import="java.util.List"%>
@@ -16,10 +20,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
         <title>JSP Page</title>
+        <%
+            if (LoggedUser.getEleitor() == null || LoggedUser.getEleitor() == new EleitorDTO() || LoggedUser.getEleitor().getTituloEleitoralEleitor() != 0) {
+                response.sendRedirect("../../index.jsp");
+            }
+        %>
     </head>
     <body>
         <%
             CandidatoDAO repository = new CandidatoDAO();
+            EleitorDAO eleitorRepository = new EleitorDAO();
             List<CandidatoDTO> lista = repository.listarCandidatos();
         %>
         <h1 class="text-center my-5">Gerenciar Candidatos</h1>
@@ -30,6 +40,7 @@
                     <tr>
                         <th>Número do Candidato</th>
                         <th>Título Eleitoral</th>
+                        <th>Nome</th>
                         <th>Situaçao</th>
                         <th style="width: 8rem;"></th>
                     </tr>
@@ -41,12 +52,13 @@
                     <tr>
                         <td><%=obj.getNumeroCandidato()%></td>
                         <td><%=obj.getTituloEleitoral()%></td>
+                        <td><%=eleitorRepository.pesquisarEleitorPorTituloEleitoral(obj.getTituloEleitoral()).getNome()%></td>
                         <td><%=obj.getSituacaoDetalhada()%></td>
                         <td style="display: flex">
                             <%if (obj.getSituacao() == 'P') {%>
                             <a class="btn btn-success mx-1" href="../actions/editarCandidato.jsp?situacao=A&tituloEleitoral=<%=obj.getTituloEleitoral()%>">Aprovar</a>
                             <a class="btn btn-danger mx-1" href="../actions/editarCandidato.jsp?situacao=N&tituloEleitoral=<%=obj.getTituloEleitoral()%>">Negar<a/>
-                                <%} else if (obj.getSituacao() == 'A') {%>
+                                <%} else if (obj.getSituacao() == 'A' && obj.getNumeroCandidato() != 0) {%>
                                 <a class="btn btn-warning mx-1" href="../actions/candidatar.jsp">Cancelar</a>
                                 <%} else {%>
                                 <a class="mx-1">
